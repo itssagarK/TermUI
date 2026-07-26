@@ -2,7 +2,7 @@
 // @termuijs/widgets — Rule widget (horizontal / vertical divider)
 // ─────────────────────────────────────────────────────
 
-import { type Screen, type Style, type Color, caps, stringWidth } from '@termuijs/core';
+import { type Screen, type Style, type Color, caps, stringWidth, truncate } from '@termuijs/core';
 import { Widget } from '../base/Widget.js';
 
 export type RuleOrientation = 'horizontal' | 'vertical';
@@ -90,7 +90,7 @@ export class Rule extends Widget {
 
         if (titleWidth >= width) {
             // Title is too wide to leave room for line glyphs — just render it
-            screen.writeString(x, y, padded.slice(0, width), lineAttrs);
+            screen.writeString(x, y, truncate(padded, width, ''), lineAttrs);
             return;
         }
 

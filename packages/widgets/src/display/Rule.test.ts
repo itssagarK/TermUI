@@ -118,8 +118,10 @@ describe('Rule', () => {
         expect(() => renderRule({}, {}, 0, 0)).not.toThrow();
     });
 
-    it('handles title wider than available width', () => {
-        expect(() => renderRule({}, { title: 'Very Long Title' }, 5, 1)).not.toThrow();
+    it('handles title wider than available width and truncates correctly', () => {
+        const { screen } = renderRule({}, { title: '🌟🌟🌟🌟🌟' }, 5, 1);
+        expect(() => renderRule({}, { title: '🌟🌟🌟🌟🌟' }, 5, 1)).not.toThrow();
+        expect(rowText(screen, 0).length).toBeLessThanOrEqual(5);
     });
 });
 
